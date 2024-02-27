@@ -1,0 +1,32 @@
+{
+  "name": "maple_it_nodejs_challenge",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon -L index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mimamulhassankhan/maple_it_nodejs_challenge.git"
+  },
+  "author": "Imamul Hassan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mimamulhassankhan/maple_it_nodejs_challenge/issues"
+  },
+  "homepage": "https://github.com/mimamulhassankhan/maple_it_nodejs_challenge#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0"
+  }
+}
