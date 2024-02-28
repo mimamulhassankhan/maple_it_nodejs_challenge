@@ -4,12 +4,16 @@ class FilesService {
     }
 
     addFile(file) {
-        console.log(this)
-        this.files.push({});
+        this.files.push(file);
+        console.log(this.files)
     }
 
-    getFiles() {
-        return this.files;
+    getFileByPublicKey(publicKey) {
+        return this.files.find(file => file.publicKey === publicKey);
+    }
+
+    deleteFilePrivateKey(privateKey) {
+        this.files = this.files.filter(file => file.privateKey !== privateKey);
     }
 }
 
