@@ -1,8 +1,12 @@
 const express = require('express');
-const filesService = require('../services/files');
-const router = express.Router();
+const multer = require('multer')
+const { addFile } = require('../controllers/files');
+const { storage } = require('../config/multer');
 
-router.post('/', filesService.addFile);
+const router = express.Router();
+const upload = multer({ storage })
+
+router.post('/', upload.single('file'), addFile);
 
 
 module.exports = router;
