@@ -1,22 +1,26 @@
-const { errorCodes } = require("../config/constants")
-
-// API error extends base Error class
-class APIError extends Error {
-    constructor(name, message) {
-        super(message)
-        this.name = name
-    }
-}
+const { errorCodes, errorNames } = require("../config/constants")
+const ApiError = require("../lib/ApiError")
 
 function errorHandler(err, req, res, next) {
     if (res.headersSent) {
         return next(err)
     }
-    const errorDetails = errorCodes.get(err.name)
-    console.error(errorDetails)
-    console.log('error', err.name)
-    res.status(500)
-    res.json({ message: err.message })
+    let statusCode = 400;
+    let message = 'Bad request';
+    let errors = {};
+    let status = 'fail';
+    let type = errorNames.BAD_REQUEST_ERROR;
+
+    if (err instanceof ApiError) {
+        statusCode = err.statusCode;
+        message = err.message;
+        errors = err.errors;
+        status = err.status;
+        type = err.type;
+    }
+
+    res.status(statusCode)
+    res.json({ type, status, message, ...(Object.keys(errors).length > 0 ? errors : {}) })
 }
 
 module.exports = errorHandler;

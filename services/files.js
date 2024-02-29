@@ -1,4 +1,6 @@
 const fs = require('fs');
+const ApiError = require('../lib/ApiError');
+const { errorNames } = require('../config/constants');
 
 class FilesService {
     constructor() {
@@ -10,7 +12,12 @@ class FilesService {
     }
 
     getFile(id) {
-        return this.files.find(file => file.id === id);
+        const file = this.files.find(file => file.id === id);
+        if (file) {
+            return file;
+        } else {
+            throw new ApiError(errorNames.NOT_FOUND_ERROR, 'File not found');
+        }
     }
 
     updateFile(id, data) {
@@ -18,21 +25,21 @@ class FilesService {
         if (index !== -1) {
             this.files[index] = { ...this.files[index], ...data };
         } else {
-            throw new Error("File not found");
+            throw new ApiError(errorNames.NOT_FOUND_ERROR, 'File not found');
         }
     }
 
     deleteFile(id) {
-        const file = this.files.find(file => file.id === id);
+        const file = this.getFile(id);
         if (file) {
             try {
                 fs.unlinkSync(file.path);
                 this.files = this.files.filter(file => file.id !== id);
             } catch (err) {
-                throw new Error("File could not be deleted");
+                throw new ApiError(errorNames.BAD_REQUEST_ERROR, 'File could not be deleted');
             }
         } else {
-            throw new Error("");
+            throw new ApiError(errorNames.NOT_FOUND_ERROR, 'File not found');
         }
     }
 }

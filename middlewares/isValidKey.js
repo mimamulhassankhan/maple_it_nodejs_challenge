@@ -1,4 +1,5 @@
 const { errorNames } = require("../config/constants");
+const ApiError = require("../lib/ApiError");
 const cryptoService = require("../services/crypto");
 
 
@@ -8,7 +9,7 @@ const isValidKey = (type) => {
         if (cryptoService.validateKey(key, type)) {
             next();
         } else {
-            throw new Error({ name: errorNames.Forbidden });
+            throw new ApiError(errorNames.FORBIDDEN_ERROR);
         }
     };
 }
