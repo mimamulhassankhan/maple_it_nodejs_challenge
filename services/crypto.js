@@ -1,6 +1,4 @@
 class CryptoService {
-    secret;
-
     constructor() {
         this.secret = 'supersecret';
     }
@@ -15,10 +13,17 @@ class CryptoService {
     }
 
     // Validate key
-    validateKey(file_id, key, type = "public") {
-        return key === `${type}_key__${file_id}__`.concat(this.secret);
+    validateKey(key, type = "public") {
+        const regex = new RegExp(`^${type}_key__\\d+__${this.secret}$`);
+        return regex.test(key);
     }
 
+    // key to id, can be public or private
+    keyToId(key) {
+        const regex = new RegExp(`^.*__(\\d+)__${this.secret}$`);
+        const match = key.match(regex);
+        return match ? +match[1] : null;
+    }
 }
 
 module.exports = new CryptoService();

@@ -1,7 +1,7 @@
 class CommonService {
     constructor() { }
 
-    // use generator function to generate a sequential id
+    // generator function to generate a sequential id
     * generateId() {
         let id = 1;
         while (true) {
