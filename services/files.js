@@ -9,6 +9,7 @@ class FilesService {
 
     addFile(file) {
         this.files.push(file);
+        console.log(this.files)
     }
 
     getFile(id) {
@@ -18,6 +19,11 @@ class FilesService {
         } else {
             throw new ApiError(errorNames.NOT_FOUND_ERROR, 'File not found');
         }
+    }
+
+    listExpiredFiles() {
+        const currentTime = Date.now();
+        return this.files.filter(file => file.expires < currentTime);
     }
 
     updateFile(id, data) {

@@ -44,8 +44,11 @@ const errorCodes = {
 const appConfig = {
     name: process.env.API_NAME || 'API',
     version: process.env.API_VERSION || '1.0.0',
-    port: process.env.APP_PORT || 5000,
+    port: process.env.PORT || 5000,
     uploadDir: process.env.UPLOAD_DIR || 'uploads',
+    inactivityTimeout: process.env.INACTIVITY_TIMEOUT || 5 * 60,
+    maxDailyDownloads: process.env.MAX_DAILY_DOWNLOADS || 5,
+    maxDailyUploads: process.env.MAX_DAILY_UPLOADS || 5,
 };
 
 module.exports = {

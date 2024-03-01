@@ -7,10 +7,12 @@ const createError = require('http-errors');
 const indexRouter = require('./routes/index');
 const filesRouter = require('./routes/files');
 const errorHandler = require('./middlewares/errorHandler');
+const { appConfig } = require('./config/constants');
+const task = require('./services/cron');
 
 const app = express()
-const port = 3000
 
+task.start();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,6 +25,6 @@ app.use('/files', filesRouter);
 
 app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.listen(appConfig.port, () => {
+    console.log(`Example app listening on port ${appConfig.port}`)
 })

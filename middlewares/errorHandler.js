@@ -5,6 +5,7 @@ function errorHandler(err, req, res, next) {
     if (res.headersSent) {
         return next(err)
     }
+    console.error(err)
     let statusCode = 400;
     let message = 'Bad request';
     let errors = {};

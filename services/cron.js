@@ -1,15 +1,15 @@
-class CronService {
-    constructor() {
-        this.cron = require('node-cron');
-    }
+const cron = require('node-cron');
+const { appConfig } = require('../config/constants');
+const filesService = require('./files');
 
-    start() {
-        this.cron.schedule('*/5 * * * *', () => {
-            console.log('running a task every 5 minutes');
-        });
-    }
+const task = cron.schedule(`*/${appConfig.inactivityTimeout} * * * * *`, () => {
+    console.log(`running a task every ${appConfig.inactivityTimeout}`);
+    const expiredFiles = filesService.listExpiredFiles();
+    expiredFiles.forEach(file => {
+        filesService.deleteFile(file.id);
+    });
+}, {
+    scheduled: false
+});
 
-    // I need to run a scheculed task every 10 minutes
-    // and check 
-
-}
+module.exports = task;

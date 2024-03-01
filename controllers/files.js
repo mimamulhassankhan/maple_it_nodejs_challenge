@@ -1,4 +1,4 @@
-const { errorNames } = require("../config/constants");
+const { errorNames, appConfig } = require("../config/constants");
 const ApiError = require("../lib/ApiError");
 const FileModel = require("../models/file");
 const commonService = require("../services/common");
@@ -20,14 +20,14 @@ function handleFileDownload(req, res) {
     const publicKey = req.params.publicKey;
     const file_id = cryptoService.keyToId(publicKey);
     const file = filesService.getFile(file_id);
-    
+
     // res.download ended up calling stream.pipe(res) under the hood
     res.download(file.path, file.name, (err) => {
         if (err) {
             throw new ApiError(errorNames.BAD_REQUEST_ERROR, "File could not be downloaded");
         }
     });
-    filesService.updateFile(file.id, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24) });
+    filesService.updateFile(file.id, { expires: Date.now() + (1000 * appConfig.inactivityTimeout) });
 }
 
 function handleFileDelete(req, res) {
