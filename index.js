@@ -28,3 +28,5 @@ app.use(errorHandler)
 app.listen(appConfig.port, () => {
     console.log(`Example app listening on port ${appConfig.port}`)
 })
+
+module.exports = app;

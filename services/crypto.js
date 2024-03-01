@@ -5,7 +5,6 @@ class CryptoService {
 
     // Generate a fake key pair using file_id
     generateKeyPair(file_id) {
-        console.log(this)
         return {
             publicKey: `public_key__${file_id}__`.concat(this.secret),
             privateKey: `private_key__${file_id}__`.concat(this.secret)

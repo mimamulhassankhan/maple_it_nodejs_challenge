@@ -9,7 +9,6 @@ class FilesService {
 
     addFile(file) {
         this.files.push(file);
-        console.log(this.files)
     }
 
     getFile(id) {

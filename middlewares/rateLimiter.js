@@ -1,5 +1,5 @@
 const setRateLimit = require("express-rate-limit");
-const { appConfig } = require("../config/constants");
+const { appConfig, errorNames } = require("../config/constants");
 
 const time = 1 * 60 * 1000;
 

@@ -39,13 +39,17 @@ const errorCodes = {
         statusCode: 404,
         message: 'Not found Target Resource',
     },
+    [errorNames.TOO_MANY_REQUESTS_ERROR]: {
+        statusCode: 429,
+        message: 'Too many requests',
+    },
 }
 
 const appConfig = {
     name: process.env.API_NAME || 'API',
     version: process.env.API_VERSION || '1.0.0',
     port: process.env.PORT || 5000,
-    uploadDir: process.env.UPLOAD_DIR || 'uploads',
+    uploadDir: process.env.FOLDER || '/var/www/uploads/',
     inactivityTimeout: process.env.INACTIVITY_TIMEOUT || 5 * 60,
     maxDailyDownloads: process.env.MAX_DAILY_DOWNLOADS || 5,
     maxDailyUploads: process.env.MAX_DAILY_UPLOADS || 5,
