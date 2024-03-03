@@ -73,16 +73,17 @@ npm test
 
 Make sure to install the dev dependencies before running the tests. The tests will run and display the results in the terminal.
 
-## Acknowledgements about my writing test cases
+## Acknowledgements about writing test cases
 
 I am not a good test case writer, I have indepth knowledge of writing test cases, hence I have written only few test cases. I have written test cases for the happy path and few negative test cases. I have not written test cases for all the scenarios. Advanced test cases like edge cases, rate limiting, cron jobs, etc are not written. I have written only basic test cases.
 
 My apologies for not writing the test cases as per the expectations.
 
-## How CRON job works in this application
-First of you need to set the environment variable `INACTIVITY_TIMEOUT` to the desired value in seconds. The default value is 60 seconds. The application uses the `node-cron` library to schedule a cron job that runs every desired time interval. 
+## How Task Schduler works in this application
 
-When a file is uploaded, file model saves the expires field with the current time plus the inactivity timeout, and when download is requested, the application modify the expires field with the current time plus the inactivity timeout. 
+First of you need to set the environment variable `INACTIVITY_TIMEOUT` to the desired value in seconds. The default value is 60 seconds. The application uses the `node-cron` library to schedule a cron job that runs every desired time interval.
+
+When a file is uploaded, file model saves the expires field with the current time plus the inactivity timeout, and when download is requested, the application modify the expires field with the current time plus the inactivity timeout.
 
 The cron job runs every desired time interval and check for expired files. If the file is expired, the application deletes the file from the file system and the in-memory data store.
 
@@ -90,4 +91,9 @@ This is simple implementation of the cron job.
 
 ## Acknowledgement about Data Persistence
 
+**I have used in-memory data store to persist the files data.** I have not used any database to persist the data. I have used simple array to store the files data, hence the data will be lost when the application is stopped.
 
+## Postman Collection
+
+I have created a postman collection to test the API endpoints. You can find the postman collection in the following file:
+[maple_it_nodejs_challenge.postman_collection.json](https://github.com/mimamulhassankhan/maple_it_nodejs_challenge/blob/main/api-doc/maple_it_nodejs_challenge.postman_collection.json)

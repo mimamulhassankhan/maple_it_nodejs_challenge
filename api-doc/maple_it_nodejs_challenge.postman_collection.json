@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "e7dd721a-20a6-4e3f-9791-d319f177c998",
+		"name": "File Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12926778",
+		"_collection_link": "https://xenon-solutions.postman.co/workspace/Outsourcing~a65b5902-0ac0-4130-8a32-172aac38f450/collection/12926778-e7dd721a-20a6-4e3f-9791-d319f177c998?action=share&source=collection_link&creator=12926778"
+	},
+	"item": [
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/imamu/Downloads/Resume.doc"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/files",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_file",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/files/public_key__1__supersecret",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"files",
+								"public_key__1__supersecret"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_file",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/files/private_keyggg__2__supersecretss",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"files",
+								"private_keyggg__2__supersecretss"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}",
+					"host": [
+						"{{BASE_URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
